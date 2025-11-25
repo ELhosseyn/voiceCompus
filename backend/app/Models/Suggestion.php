@@ -1,0 +1,40 @@
+<?php
+// app/Models/Suggestion.php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Suggestion extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'title',
+        'description',
+        'status',
+        'admin_comment',
+        'department_id',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function votes()
+    {
+        return $this->belongsToMany(User::class, 'suggestion_votes', 'suggestion_id', 'user_id');
+    }
+
+    public function getUpvotesAttribute()
+    {
+        return $this->votes()->count();
+    }
+}
