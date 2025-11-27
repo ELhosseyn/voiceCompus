@@ -12,8 +12,8 @@ import DepartmentalAdminDashboardPage from '@/pages/DepartmentalAdminDashboardPa
 import { ThemeProvider } from '@/components/ThemeProvider';
 import authService from '@/services/authService';
 
-    function App() {
-      const [user, setUser] = React.useState(() => {
+function App() {
+  const [user, setUser] = React.useState(() => {
     return authService.getUser();
   });
 
